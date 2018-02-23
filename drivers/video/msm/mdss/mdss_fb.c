@@ -1174,6 +1174,12 @@ void mdss_fb_set_backlight(struct msm_fb_data_type *mfd, u32 bkl_lvl)
 	if ((bkl_lvl == 0) && (mfd->doze_mode)) {
 		pr_debug("keeping backlight on with always-on displays\n");
 		mfd->unset_bl_level = 0;
+#ifdef CONFIG_MACH_WT86518
+		if(bkl_lvl==0)
+                    {  pdata = dev_get_platdata(&mfd->pdev->dev);
+                        pdata->set_backlight(pdata, bkl_lvl);  
+                    }	
+#endif
 		return;
 	}
 
@@ -2897,9 +2903,14 @@ static int __mdss_fb_display_thread(void *data)
 				mfd->index);
 
 	while (1) {
-		wait_event(mfd->commit_wait_q,
+		ret = wait_event_interruptible(mfd->commit_wait_q,
 				(atomic_read(&mfd->commits_pending) ||
 				 kthread_should_stop()));
+
+		if (ret) {
+			pr_info("%s: interrupted", __func__);
+			continue;
+		}
 
 		if (kthread_should_stop())
 			break;
