@@ -3817,6 +3817,7 @@ unsigned long this_cpu_load(void)
  *  This covers the NO_HZ=n code, for extra head-aches, see the comment below.
  */
 
+
 /* Variables and functions for calc_load */
 static atomic_long_t calc_load_tasks;
 static unsigned long calc_load_update;
