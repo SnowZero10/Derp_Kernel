@@ -19,6 +19,6 @@ config MACH_I46D1G
 	bool "I46d1g board"
 	select MACH_HISENSE_MSM8916
 	help
-	  Support for Haier I46d1g variant
+	  Support for Hisense I46d1g variant
 
 endmenu
