@@ -1083,7 +1083,7 @@ config TOUCHSCREEN_GT9XX
 
           If unsure, say N.
 
-source "drivers/input/touchscreen/gt9xx/Kconfig"
+source "drivers/input/touchscreen/goodix/Kconfig"
 
 config TOUCHSCREEN_GT9XX_HQ
 	bool "Goodix touchpanel (HQ variant)"
