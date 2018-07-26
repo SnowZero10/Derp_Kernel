@@ -2196,7 +2196,7 @@ file_fail:
 static int get_fw_filename(char *buf, int size) 
 {
  	strlcpy(buf, "/etc/firmware/fw_", size);
-	strlcat(buf, CONFIG_PRODUCT_INFO, size);
+	//strlcat(buf, CONFIG_PRODUCT_INFO, size);
 	strlcat(buf, "_goodix.bin", size); 
 	return 0;     
 }
