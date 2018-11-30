@@ -38,6 +38,9 @@ source "drivers/media/platform/msm/camera_v2/Kconfig"
 if CONFIG_MACH_WT86518
 source "drivers/media/platform/msm/camera_wt86518_v2/Kconfig"
 endif
+if CONFIG_MACH_HS8916QC
+source "drivers/media/platform/msm/camera_hs8916qc_v2/Kconfig"
+endif
 endif # MSMB_CAMERA
 
 source "drivers/media/platform/msm/vidc/Kconfig"

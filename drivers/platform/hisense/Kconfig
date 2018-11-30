@@ -1,0 +1,24 @@
+# Hisense configuration options
+
+config MACH_HISENSE
+	bool "Hisense device"
+	depends on ARCH_MSM
+	help
+	  Support for Hisense products
+
+config MACH_HISENSE_MSM8916
+	bool "Haier MSM8916"
+	depends on ARCH_MSM8916
+	select MACH_HISENSE
+	help
+	  Support for MSM8916 Hisense variants
+
+menu "Hisense board selection"
+
+config MACH_HS8916QC
+	bool "HS8916QC board"
+	select MACH_HISENSE_MSM8916
+	help
+	  Support for Hisense HS8916QC variant
+
+endmenu
