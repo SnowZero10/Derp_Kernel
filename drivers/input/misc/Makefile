@@ -79,6 +79,7 @@ obj-$(CONFIG_SENSORS_AP3426_CM)		+= ap3426_cm.o
 obj-$(CONFIG_SENSORS_BMA2X2)	+= bstclass.o
 
 obj-$(CONFIG_SENSORS_BMA2X2)	+= bma2x2.o
+obj-$(CONFIG_SENSORS_KIONIX_ACCEL)	+= kionix_accel_g36c1h.o
 obj-$(CONFIG_SENSORS_LTR553)	+= ltr553.o
 obj-$(CONFIG_SENSORS_ELAN_EPL2182)      += elan_epl2182.o
 
