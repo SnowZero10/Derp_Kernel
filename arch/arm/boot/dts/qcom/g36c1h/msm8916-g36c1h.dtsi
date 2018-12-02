@@ -218,7 +218,7 @@
 			  drive-strength = <6>;
 			  bias-pull-up;
 		};
-	};
+	};	
 };
 
 &i2c_0 { /* BLSP1 QUP2 */
@@ -248,19 +248,19 @@
 	};
 
 	kionix@e {
-		compatible = "kionix,kionix_accel";
-		reg = <0x0e>;
+		compatible = "kionix,kxtj2-1009";
+        reg = <0x0e>;
 		interrupt-parent = <&msm_gpio>;
-		interrupts = <112 0x2>;
+		interrupts = <112 0x2002>;
 		vdd-supply = <&pm8916_l17>;
 		vio-supply = <&pm8916_l6>;
-		kionix,min-interval = <5>;
-		kionix,poll-interval = <200>;
-		kionix,accel-direction = <0>;
-		kionix,accel-irq-use-drdy = <0>;
-		kionix,accel-res = <12>;
-		kionix,accel-g-range = <2>;
-	};
+		kionix,min_interval = <5>;
+		kionix,poll_interval = <100>;
+		kionix,accel_direction = <2>;
+		kionix,accel_irq_use_drdy = <0>;
+		kionix,accel_res = <12>;
+		kionix,accel_g_range = <2>;
+        };
 };
 
 &sdc2_cd_on {
