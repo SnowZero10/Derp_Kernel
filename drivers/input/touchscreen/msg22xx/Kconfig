@@ -1,0 +1,29 @@
+#
+# MSG22XX touchscreen driver configuration
+#
+menuconfig ENABLE_CHIP_MSG22XX
+	bool "MSG22XX touchscreen"
+	default n
+	help
+	  Say Y here if you have a MSG22XX touchscreen connected
+	  to your system.
+
+	  If unsure, say N.
+
+if ENABLE_CHIP_MSG22XX
+
+choice
+	default TOUCHSCREEN_MSG22XX
+	prompt "MSG22XX touchscreen bus interface"
+
+config TOUCHSCREEN_MSG22XX            
+	tristate "MSG22XX touchscreen"
+	depends on I2C
+	help
+	  Say Y here if you have a MSG22XX touchscreen.
+	  If unsure, say N.
+	  To compile this driver as a module, choose M here: the
+	  module will be called MSG22XX.
+endchoice
+
+endif
