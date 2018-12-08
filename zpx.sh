@@ -17,8 +17,8 @@
 
 ####
 ## platform specifics
-export KBUILD_BUILD_USER="Cangkuls"
-export KBUILD_BUILD_HOST="ZeroProjectX"
+export KBUILD_BUILD_USER="H34THCL1FF"
+export KBUILD_BUILD_HOST="STL"
 export ARCH=arm
 export SUBARCH=arm
 export USE_CCACHE=1
@@ -26,7 +26,7 @@ export USE_CCACHE=1
 #@@@@@@@@@@@@@@@@@@@@@@ DEFINITIONS BEGIN @@@@@@@@@@@@@@@@@@@@@@@@@@@#
 ##### Tool-chain, you should get it yourself which tool-chain 
 ##### you would like to use
-KERNEL_TOOLCHAIN=/home/eko/linaro/bin/arm-linux-gnueabi-
+KERNEL_TOOLCHAIN=/home/dody/linaro-7.3.1/bin/arm-linux-gnueabi-
 
 ## This script should be inside the kernel-code directory
 KERNEL_DIR=$PWD
@@ -39,7 +39,7 @@ yellow='\033[0;33m'
 red='\033[0;31m'
 nocol='\033[0m'
 ## should be preset in arch/arm/configs of kernel-code
-KERNEL_DEFCONFIG=lineageos_wt88047_defconfig
+KERNEL_DEFCONFIG=lineageos_rendang_defconfig
 
 ## make jobs
 MAKE_JOBS=$( nproc --all )
@@ -173,8 +173,6 @@ cd ../..;
 mv -f $ANYKERNEL/$ZIP /home/eko/r2/$ZIP;
 
 echo "Uploading to my account telegram. . .";
-cd
-curl -F chat_id="257612196" -F document=@"r2/$ZIP" https://api.telegram.org/bot341370978:AAHNAQa340-t2heNRxftBxlOY5j8PvvjBDE/sendDocument
 
 #Then doing cleanup
 echo "Doing post-cleanup...";
