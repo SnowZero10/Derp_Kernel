@@ -1,27 +1,11 @@
 #[PLATFORM]-Add-BEGIN by mike.li for msg2238 driver code.[2015.03.06]
-menuconfig ENABLE_CHIP_MSG22XX
-	bool "MSG22XX touchscreen"
+config TOUCHSCREEN_MSG2XXX           
+       tristate "MSG2XXX touchscreen"
 	default n
-	help
-	  Say Y here if you have a MSG22XX touchscreen connected
-	  to your system.
-
-	  If unsure, say N.
-
-if ENABLE_CHIP_MSG22XX
-
-choice
-	default TOUCHSCREEN_MSG2XXX
-	prompt "MSG2XXX touchscreen bus interface"
-
-config TOUCHSCREEN_MSG2XXX            
-	tristate "MSG2XXX touchscreen"
-	depends on I2C
-	help
-	  Say Y here if you have a MSG2XXX touchscreen.
-	  If unsure, say N.
-	  To compile this driver as a module, choose M here: the
-	  module will be called MSG2XXX.
-endchoice
-endif
+       depends on I2C
+       help
+         Say Y here if you have a MSG2XXX touchscreen on Haier A16C3H.
+         If unsure, say N.
+         To compile this driver as a module, choose M here: the
+         module will be called MSG2XXX.
 #[PLATFORM]-Add-END by mike.li
