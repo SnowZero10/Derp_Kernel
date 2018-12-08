@@ -21,6 +21,30 @@
 
 &soc {
 	i2c@78b9000 { /* BLSP1 QUP5 */
+		synaptics@20 {
+			compatible = "synaptics,rmi4";
+			reg = <0x20>;
+			interrupt-parent = <&msm_gpio>;
+			interrupts = <13 0x2008>;
+			vdd-supply = <&pm8916_l17>;
+			vcc_i2c-supply = <&pm8916_l6>;
+			/* pins used by touchscreen */
+			pinctrl-names = "pmx_ts_active","pmx_ts_suspend","pmx_ts_suspend";
+			pinctrl-0 = <&ts_int_active &ts_reset_active>;
+			pinctrl-1 = <&ts_int_suspend &ts_reset_suspend>;
+			pinctrl-2 = <&ts_release>;
+			synaptics,display-coords = <0 0 1079 1919>;
+			synaptics,panel-coords = <0 0 1079 2084>;
+			synaptics,irq-gpio = <&msm_gpio 13 0x2008>;
+			synaptics,reset-gpio = <&msm_gpio 12 0x0>;
+			synaptics,i2c-pull-up;
+			synaptics,power-down;
+			synaptics,disable-gpios;
+			/* Underlying clocks used by secure touch */
+			clocks = <&clock_gcc clk_gcc_blsp1_ahb_clk>,
+			 <&clock_gcc clk_gcc_blsp1_qup5_i2c_apps_clk>;
+			clock-names = "iface_clk", "core_clk";
+		};
 	        goodix@5d {
 			compatible = "goodix,gt9xx";
 			reg = <0x5d>;
@@ -186,22 +210,33 @@
 		qcom,key-codes = <158 139 172 217>;
 	};
 	i2c@78b6000 { /* BLSP1 QUP2 */
-		kionix@e {
-			compatible = "kionix,kxtj9";
+		kionix@f {
+	       compatible = "kionix,kxtj9";
 			reg = <0x0e>;
-			vdd-supply = <&pm8916_l17>;
+			pinctrl-names = "default";
+			pinctrl-0 = <&kxtj9_int1_default &kxtj9_int2_default>;
+			interrupt-parent = <&msm_gpio>;
+			interrupts = <81 0x2>;
+			vdd-supply = <&pm8916_l6>;
 			vio-supply = <&pm8916_l6>;
-			kionix,min-interval = <5>;
+			kionix,min-interval = <10>;
 			kionix,init-interval = <200>;
 			kionix,axis-map-x = <1>;
 			kionix,axis-map-y = <0>;
 			kionix,axis-map-z = <2>;
 			kionix,g-range = <2>;
-			kionix,negate-x;
-			/*kionix,negate-y;*/
-			/*kionix,negate-z;*/
+			kionix,negate-z;
 			kionix,res-12bit;
-		};
+			 };
+		akm@c {
+			compatible = "ak,ak09911";
+			reg = <0x0c>;
+			vdd-supply = <&pm8916_l17>;
+			vio-supply = <&pm8916_l6>;
+			akm,layout = <0x6>;
+			akm,auto-report;
+			akm,use-hrtimer;
+			};
 
 		avago@39 { /* Ambient light and proximity sensor */
 			compatible = "avago,apds9900";
@@ -225,19 +260,6 @@
 			avago,light_fix_factor = <10>;
 			avago,ps_drive = <0>;
 		};
-		
-		akm@d { /* Akm field sensor */
-			compatible = "ak,ak09911";
-			reg = <0x0d>;
-			pinctrl-names = "default","sleep";
-			pinctrl-0 = <&akm_default>;
-			pinctrl-1 = <&akm_sleep>;
-			vdd-supply = <&pm8916_l17>;
-			vio-supply = <&pm8916_l6>;
-			akm,layout = <5>;
-			akm,gpio_rstn = <&msm_gpio 36 0x0>;
-			akm,auto-report;
-		};
 	};
 
 	sound {
@@ -245,21 +267,22 @@
 		qcom,model = "msm8x16-snd-card-mtp";
 		qcom,msm-snd-card-id = <0>;
 		qcom,msm-codec-type = "internal";
-		qcom,msm-ext-pa = "primary";
+		qcom,msm-ext-pa = <0>;
 		qcom,msm-mclk-freq = <9600000>;
-		qcom,msm-mbhc-hphl-swh = <0>;
+		qcom,msm-mbhc-hphl-swh = <1>;
 		qcom,msm-mbhc-gnd-swh = <0>;
 		qcom,msm-micbias1-ext-cap;
-		qcom,msm-hs-micbias-type = "internal";
+		qcom,msm-micbias2-ext-cap;
+		qcom,msm-hs-micbias-type = "external";
 		qcom,audio-routing =
 			"RX_BIAS", "MCLK",
 			"SPK_RX_BIAS", "MCLK",
 			"INT_LDO_H", "MCLK",
 			"MIC BIAS External", "Handset Mic",
-			"MIC BIAS Internal2", "Headset Mic",
+			"MIC BIAS External2", "Headset Mic",
 			"MIC BIAS External", "Secondary Mic",
 			"AMIC1", "MIC BIAS External",
-			"AMIC2", "MIC BIAS Internal2",
+			"AMIC2", "MIC BIAS External2",
 			"AMIC3", "MIC BIAS External",
 			"DMIC1", "MIC BIAS Internal1",
 			"MIC BIAS Internal1", "Digital Mic1",
@@ -280,6 +303,8 @@
 		pinctrl-4 = <&cross_conn_det_act>;
 		pinctrl-5 = <&cross_conn_det_sus>;
 		qcom,cdc-us-euro-gpios = <&msm_gpio 120 0>;
+		qcom,ext-spk-pa-gpio = <&msm_gpio 1 0>;
+		qcom,headset-switch-gpio = <&msm_gpio 109 0>;
 		asoc-platform = <&pcm0>, <&pcm1>, <&voip>, <&voice>,
 				<&loopback>, <&compress>, <&hostless>,
 				<&afe>, <&lsm>, <&routing>, <&lpa>;
@@ -291,8 +316,7 @@
 				<&dai_mi2s0>, <&dai_mi2s1>, <&dai_mi2s2>, <&dai_mi2s3>,
 				<&sb_0_rx>, <&sb_0_tx>, <&sb_1_rx>, <&sb_1_tx>,
 				<&sb_3_rx>, <&sb_3_tx>, <&sb_4_rx>, <&sb_4_tx>,
-				<&bt_sco_rx>, <&bt_sco_tx>, <&bt_a2dp_rx>,
-				<&int_fm_rx>, <&int_fm_tx>,
+				<&bt_sco_rx>, <&bt_sco_tx>, <&int_fm_rx>, <&int_fm_tx>,
 				<&afe_pcm_rx>, <&afe_pcm_tx>, <&afe_proxy_rx>, <&afe_proxy_tx>,
 				<&incall_record_rx>, <&incall_record_tx>, <&incall_music_rx>,
 				<&incall_music_2_rx>;
@@ -304,16 +328,14 @@
 				"msm-dai-q6-dev.16390", "msm-dai-q6-dev.16391",
 				"msm-dai-q6-dev.16392", "msm-dai-q6-dev.16393",
 				"msm-dai-q6-dev.12288", "msm-dai-q6-dev.12289",
-				"msm-dai-q6-dev.12290", "msm-dai-q6-dev.12292",
-				"msm-dai-q6-dev.12293",	"msm-dai-q6-dev.224",
-				"msm-dai-q6-dev.225", "msm-dai-q6-dev.241",
-				"msm-dai-q6-dev.240", "msm-dai-q6-dev.32771",
-				"msm-dai-q6-dev.32772", "msm-dai-q6-dev.32773",
-				"msm-dai-q6-dev.32770";
+				"msm-dai-q6-dev.12292", "msm-dai-q6-dev.12293",
+				"msm-dai-q6-dev.224", "msm-dai-q6-dev.225",
+				"msm-dai-q6-dev.241", "msm-dai-q6-dev.240",
+				"msm-dai-q6-dev.32771", "msm-dai-q6-dev.32772",
+				"msm-dai-q6-dev.32773", "msm-dai-q6-dev.32770";
 		asoc-codec = <&stub_codec>, <&pm8916_tombak_dig>;
 		asoc-codec-names = "msm-stub-codec.1", "tombak_codec";
 	};
-
 	cam_avdd_vodd: regulator-cam-gpio {
 		compatible = "regulator-fixed";
 	    regulator-name = "cam_power";
@@ -346,7 +368,25 @@
 		pinctrl-names = "tlmm_gpio_key_active","tlmm_gpio_key_suspend";
 		pinctrl-0 = <&gpio_key_active>;
 		pinctrl-1 = <&gpio_key_suspend>;
-		
+/*delete conflictive gpio with platform by hisense 2014.12.19
+		camera_focus {
+			label = "camera_focus";
+			gpios = <&msm_gpio 108 0x1>;
+			linux,input-type = <1>;
+			linux,code = <0x210>;
+			gpio-key,wakeup;
+			debounce-interval = <15>;
+		};
+
+		camera_snapshot {
+			label = "camera_snapshot";
+			gpios = <&msm_gpio 109 0x1>;
+			linux,input-type = <1>;
+			linux,code = <0x2fe>;
+			gpio-key,wakeup;
+			debounce-interval = <15>;
+		};
+*/
 		vol_up {
 			label = "volume_up";
 			gpios = <&msm_gpio 107 0x1>;

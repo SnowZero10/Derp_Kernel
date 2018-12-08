@@ -1073,7 +1073,7 @@ config SECURE_TOUCH
 
 	  If unsure, say N.
 
-config TOUCHSCREEN_GT9XX
+menuconfig TOUCHSCREEN_GT9XX
 	bool "Goodix touchpanel GT9xx series"
 	depends on I2C
 	help
@@ -1083,7 +1083,14 @@ config TOUCHSCREEN_GT9XX
 
           If unsure, say N.
 
+if TOUCHSCREEN_GT9xx
+if MACH_HISENSE_SMARTPHONE
+source "drivers/input/touchscreen/goodix/Kconfig"
+endif
+if !MACH_HISENSE_SMARTPHONE
 source "drivers/input/touchscreen/gt9xx/Kconfig"
+endif
+endif
 
 config TOUCHSCREEN_GT9XX_HQ
 	bool "Goodix touchpanel (HQ variant)"
@@ -1162,6 +1169,8 @@ config TOUCHSCREEN_IT7260_I2C
 
 config WAKE_GESTURES
 	bool "wake gestures"
-	default y
+	default n
+
+source "drivers/input/touchscreen/msg2xxx/Kconfig"
 
 endif

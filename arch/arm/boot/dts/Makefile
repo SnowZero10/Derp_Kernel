@@ -214,6 +214,7 @@ targets += $(DTB_LIST)
 
 #used for cleaning - not building
 subdir- := qcom
+subdir- := hisense
 endif
 
 # *.dtb used to be generated in the directory above. Clean out the

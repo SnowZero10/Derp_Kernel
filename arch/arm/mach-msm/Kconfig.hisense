@@ -1,0 +1,176 @@
+config MACH_HISENSE_SMARTPHONE
+	default n
+	bool "HISENSE SMARTPHONE"
+	help
+	  Support for the hisense samrtphone board.
+
+choice
+	prompt "Hisense Smartphone Board Version"
+	default BOARD_LT642F
+
+	config BOARD_LT642F
+		bool "HISENSE BOARD LT642F"
+		depends on MACH_HISENSE_SMARTPHONE
+		help
+		  Support for the hisense LT642F board.
+
+
+
+	config BOARD_LC642U
+		bool "HISENSE BOARD LC642U"
+		depends on MACH_HISENSE_SMARTPHONE
+		help
+		  Support for the hisense LC642U board.
+
+	config BOARD_LT642Z
+		bool "HISENSE BOARD LT642Z"
+		depends on MACH_HISENSE_SMARTPHONE
+		help
+		  Support for the hisense LT642Z board.
+endchoice
+
+if BOARD_LT642Z
+	choice
+		prompt "LT642Z Board Version"
+		default BOARD_LT642Z_V1
+
+		config BOARD_LT642Z_V1
+			bool "LT642Z V1"
+			help
+			  Support for the Hisense LT642Z V1 board.
+	endchoice
+
+	choice
+		prompt "LT642Z Product"
+		default PRODUCT_LT642Z_G36C1G
+
+		config PRODUCT_LT642Z_G36C1G
+			bool "Board:LT642Z Pruduct:G36C1G"
+			help
+			  Support for the Hisense G36C1G product.
+	endchoice
+endif
+
+
+if BOARD_LC642U
+	choice
+		prompt "LC642U Board Version"
+		default BOARD_LC642U_V1
+
+		config BOARD_LC642U_V1
+			bool "LC642U V1"
+			help
+			  Support for the Hisense LC642U V1 board.
+	endchoice
+
+	choice
+		prompt "LC642U Product"
+		default PRODUCT_LC642U_I46D1G
+
+		config PRODUCT_LC642U_I46D1G
+			bool "Board:LC642U Pruduct:I46D1G"
+			help
+			  Support for the Hisense I46D1G product.
+	endchoice
+endif
+
+
+
+if BOARD_LT642F
+	choice
+		prompt "LT642F Board Version"
+		default BOARD_LT642F_V1
+
+		config BOARD_LT642F_V1
+			bool "LT642F V1"
+			help
+			  Support for the Hisense LT642F V1 board.
+	endchoice
+
+	choice
+		prompt "LT642F Product"
+		default PRODUCT_LT642F_I639M
+
+		config PRODUCT_LT642F_I639M
+			bool "Board:LT642F Pruduct:I639M"
+			help
+			  Support for the Hisense I639M product.
+	endchoice
+endif
+
+
+#--------------Board Info--------------------
+comment "Board Info Selection"
+config  BOARD_INFO
+	string "Board info"
+	default ""
+config  VENDOR_INFO
+	string "Vendor info"
+	default ""
+config  PRODUCT_INFO
+	string "Product info"
+	default ""
+config  SOFTWARE_VERSION_INFO
+	string "Software Version Info"
+	default ""
+config  HARDWARE_VERSION_INFO
+	string "Hardware Version Info"
+	default ""
+
+
+#--------------release version related--------------------
+config MSM_RELEASE_VERSION
+        bool "msm release version"
+	 default n
+        help
+          Enable the config if the release version.
+          If unsure, say N
+config MSM_REBOOT_ON_PANIC
+        bool "reboot system on panic"
+	 default n
+        help
+          Enable the config if the release version.
+          If unsure, say N
+
+config HS_PANIC_HANDLE
+        bool "panic handle feature"
+	 default n
+        help
+          Enable the config if use hisense panic handle.
+          If unsure, say N
+          
+config BUILT_IN_BATTERY
+        bool "build in battery or not"
+	 default n
+        help
+          If unsure, say N
+
+#--------------hisense feature----------------------------
+config POWER_OFF_TIMEOUT
+	bool "deal with the power off timeout"
+         default n
+	help
+         Enable the config if the power off timeout
+         should be deal with.
+
+config PRINTK_RTC_TIME
+        bool "printk with RTC time"
+	 default n
+        help
+          Enable the config if want more debug message.
+          If unsure, say N
+
+config PRINTK_CPU_ID
+        bool "printk with cpu ID"
+	 default n
+        help
+          Enable the config if want more debug message.
+          If unsure, say N
+          
+#--------------feature related--------------------
+config HISENSE_USB_FEATURE
+        bool "enable hisense usb feature"
+	 default y
+        help
+          Enable the config if enable hisense usb feature .
+          If unsure, say N

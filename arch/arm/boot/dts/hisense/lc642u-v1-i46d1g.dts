@@ -12,9 +12,9 @@
 
 /dts-v1/;
 
-#include "msm8916.dtsi"
-#include "i46d1g/msm8916-i46d1g.dtsi"
-#include "msm8916-memory.dtsi"
+#include "../qcom/msm8916.dtsi"
+#include "lc642u-i46d1g/lc642u-v1-i46d1g.dtsi"
+#include "../qcom/msm8916-memory.dtsi"
 
 / {
 	model = "Qualcomm Technologies, Inc. MSM 8916 MTP";
