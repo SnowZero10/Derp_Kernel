@@ -83,7 +83,7 @@ obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_DSX_RMI4_DEV)	+= synaptics_rmi_dev.o
 obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_DSX_FW_UPDATE) 	+= synaptics_fw_update.o
 obj-$(CONFIG_TOUCHSCREEN_SYNAPTICS_I2C_RMI4)		+= synaptics_i2c_rmi4.o
 
-if($(CONFIG_MACH_HISENSE_SMARTPHONE),y)
+ifeq ($(CONFIG_MACH_HISENSE_SMARTPHONE),y)
 obj-$(CONFIG_TOUCHSCREEN_GT9XX)		+= goodix/
 else
 obj-$(CONFIG_TOUCHSCREEN_GT9XX)		+= gt9xx/
@@ -100,8 +100,13 @@ obj-$(CONFIG_MACH_LONGCHEER)	+= lct_ctp_selftest.o
 obj-$(CONFIG_MACH_LONGCHEER)	+= lct_ctp_upgrade.o
 obj-$(CONFIG_MACH_LONGCHEER)	+= lct_if_ctp_upgrade.o
 
+ifeq (!$(CONFIG_ENABLE_CHIP_MSG22XX),y)
 obj-$(CONFIG_TOUCHSCREEN_MSG2XXX)	+= msg2xxx.o
+endif
 obj-$(CONFIG_MACH_YULONG)		+= touchscreen_yl.o
 
 obj-$(CONFIG_WAKE_GESTURES)		+= wake_gestures.o
 obj-$(CONFIG_ENABLE_CHIP_MSG22XX)       += msg2xxx/
+ifeq ($(CONFIG_MACH_HISENSE_SMARTPHONE),y)
+obj-y += ts_func_test.o
+endif
