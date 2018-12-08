@@ -1083,7 +1083,7 @@ menuconfig TOUCHSCREEN_GT9XX
 
           If unsure, say N.
 
-if TOUCHSCREEN_GT9xx
+if TOUCHSCREEN_GT9XX
 if MACH_HISENSE_SMARTPHONE
 source "drivers/input/touchscreen/goodix/Kconfig"
 endif
