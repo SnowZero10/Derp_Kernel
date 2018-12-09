@@ -80,7 +80,7 @@
 		       vio-supply = <&pm8909_l6>;
 		       kionix,min_interval = <5>;
 		       kionix,poll_interval = <100>;
-		       kionix,accel_direction = <4>;
+		       kionix,accel_direction = <2>;
 		       kionix,accel_irq_use_drdy = <0>;
 		       kionix,accel_res = <12>;
 		       kionix,accel_g_range = <2>;
