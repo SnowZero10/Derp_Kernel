@@ -199,7 +199,8 @@ static int num_free_chunks(struct zbud_header *zhdr)
  * Return: pointer to the new zbud pool or NULL if the metadata allocation
  * failed.
  */
-struct zbud_pool *zbud_create_pool(gfp_t gfp, struct zbud_ops *ops)
+static void *zbud_zpool_create(char *name, gfp_t gfp,
+			struct zpool_ops *zpool_ops))
 {
 	struct zbud_pool *pool;
 	int i;
