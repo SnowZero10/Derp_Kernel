@@ -1037,7 +1037,14 @@ config TOUCHSCREEN_GT9XX
 
           If unsure, say N.
 
+if TOUCHSCREEN_GT9XX
+if MACH_HISENSE_SMARTPHONE
+source "drivers/input/touchscreen/goodix/Kconfig"
+endif
+if !MACH_HISENSE_SMARTPHONE
 source "drivers/input/touchscreen/gt9xx/Kconfig"
+endif
+endif
 
 config TOUCHSCREEN_BU21150
 	tristate "JDI AFE BU21150"
