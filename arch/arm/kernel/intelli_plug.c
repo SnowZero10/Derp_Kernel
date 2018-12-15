@@ -189,9 +189,10 @@ static unsigned int calculate_thread_stats(void)
 		unsigned int nr_threshold;
 		nr_threshold = current_profile[nr_run - 1];
 
-		if (nr_run_last <= nr_run)
+		if (nr_run_last <= nr_run){
 			nr_threshold += nr_run_hysteresis;
 			break;
+		}
 	}
 	nr_run_last = nr_run;
 
