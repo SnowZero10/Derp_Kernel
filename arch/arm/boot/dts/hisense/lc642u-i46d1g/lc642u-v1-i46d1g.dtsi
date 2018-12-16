@@ -525,6 +525,8 @@
 	qcom,platform-enable-gpio = <&msm_gpio 97 0>;
 	qcom,platform-reset-gpio = <&msm_gpio 25 0>;
 	qcom,platform-bklight-en-gpio = <&msm_gpio 98 0>;
+	qcom,regulator-ldo-mode;  		
+    qcom,platform-regulator-settings = [02 09 03 00 20 00 01]; 
 };
 
 &dsi_otm1283a_booyi_720p_vid {
