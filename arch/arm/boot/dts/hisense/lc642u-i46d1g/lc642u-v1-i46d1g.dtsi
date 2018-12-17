@@ -497,6 +497,7 @@
 #include "dsi-panel-otm1283a-booyi-720p-video.dtsi"
 #include "dsi-panel-hx8394a-goworld-lgp3-720p-video.dtsi"
 #include "dsi-panel-hx8394a-goworld-lgp4-720p-video.dtsi"
+#include "dsi-panel-hx8394a-goworld-lg-720p-video.dtsi"
 
 &mdss_mdp {
 	qcom,mdss-pref-prim-intf = "dsi";
@@ -518,6 +519,7 @@
 	qcom,dsi-pref-prim-pan = <&dsi_otm1283a_booyi_720p_vid>;
 	qcom,dsi-pref-prim-pan = <&dsi_hx8394a_goworld_lgp3_720p_vid>;
 	qcom,dsi-pref-prim-pan = <&dsi_hx8394a_goworld_lgp4_720p_vid>;
+	qcom,dsi-pref-prim-pan = <&dsi_hx8394a_goworld_lg_720p_vid>;
 	pinctrl-names = "mdss_default", "mdss_sleep";
 	pinctrl-0 = <&mdss_dsi_active &mdss_te_active>;
 	pinctrl-1 = <&mdss_dsi_suspend &mdss_te_suspend>;
