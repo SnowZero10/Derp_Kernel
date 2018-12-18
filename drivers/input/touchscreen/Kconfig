@@ -1075,4 +1075,6 @@ config TOUCHSCREEN_IT7260_I2C
 
 source "drivers/input/touchscreen/msg22xx/Kconfig"
 
+source "drivers/input/touchscreen/msg22xx_g151/Kconfig"
+
 endif

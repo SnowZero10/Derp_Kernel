@@ -84,3 +84,4 @@ obj-$(CONFIG_TOUCHSCREEN_BU21150)	+= bu21150.o
 obj-$(CONFIG_INPUT_MT_WRAPPER)		+= input_mt_wrapper.o
 obj-$(CONFIG_TOUCHSCREEN_IT7260_I2C)    += it7258_ts_i2c.o
 obj-$(CONFIG_ENABLE_CHIP_MSG22XX)       += msg22xx/
+obj-$(CONFIG_TOUCHSCREEN_MSTAR_G151)       += msg22xx_g151/
