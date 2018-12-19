@@ -21,4 +21,10 @@ config MACH_RENDANG
 	help
 	  Support for Haier Rendang variant
 
+config MACH_SATE
+	bool "Sate board"
+	select MACH_HAIER_MSM8916
+	help
+	  Support for Haier Sate variant
+
 endmenu
