@@ -297,21 +297,21 @@
 		compatible = "avago,apds9930";
 		reg = <0x39>;
 		pinctrl-names = "default", "sleep";
-		pinctrl-0 = <0xde>;
-		pinctrl-1 = <0xdf>;
-		interrupt-parent = <0x48>;
+		pinctrl-0 = <&apds99xx_default>;
+		pinctrl-1 = <&apds99xx_sleep>;
+		interrupt-parent = <&msm_gpio>;
 		interrupts = <0x71 0x2002>;
-		vdd-supply = <0x4d>;
-		vio-supply = <0x4e>;
-		avago,irq-gpio = <0x48 0x71 0x2002>;
-		avago,ps-threshold = <0x258>;
-		avago,ps-hysteresis-threshold = <0x1f4>;
-		avago,ps-pulse = <0x8>;
-		avago,ps-pgain = <0x0>;
-		avago,als-B = <0xba>;
-		avago,als-C = <0x4b>;
-		avago,als-D = <0x81>;
-		avago,ga-value = <0x300>;
+		vdd-supply = <&pm8916_l17>;
+		vio-supply = <&pm8916_l6>;
+		avago,irq-gpio = <&msm_gpio 0x71 0x2002>;
+		avago,ps-threshold = <600>;
+		avago,ps-hysteresis-threshold = <500>;
+		avago,ps-pulse = <8>;
+		avago,ps-pgain = <0>;
+		avago,als-B = <186>;
+		avago,als-C = <75>;
+		avago,als-D = <129>;
+		avago,ga-value = <768>;
 	};
 
 	bosch@18 {
@@ -320,13 +320,13 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&int1_default &int2_default>;
 		interrupt-parent = <&msm_gpio>;
-		interrupts = <&mm_int_bimc 0x2002>;
+		interrupts = <0x70 0x2002>;
 		vdd-supply = <&pm8916_l17>;
 		vio-supply = <&pm8916_l6>;
 		bosch,init-interval = <200>;
 		bosch,place = <2>;
-		bosch,gpio-int1 = <&msm_gpio &mm_int_bimc 0x2002>;
-		bosch,gpio-int2 = <&msm_gpio &mm_int_bimc 0x2002>;
+		bosch,gpio-int1 = <&msm_gpio 0x70 0x2002>;
+		bosch,gpio-int2 = <&msm_gpio 0x70 0x2002>;
 	};
 
 	memsic@30 { /* Magnetic field sensor */
