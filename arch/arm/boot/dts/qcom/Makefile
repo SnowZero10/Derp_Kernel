@@ -30,7 +30,12 @@ dtb-$(CONFIG_ARCH_MSM8974) += msm8974-v1-cdp.dtb \
 	msm8974pro-ac-pma8084-pm8941-mtp.dtb
 
 ifeq ($(CONFIG_MACH_HAIER_MSM8909),y)
+ifeq ($(CONFIG_MACH_HY_A16C3H),y)
 dtb-$(CONFIG_ARCH_MSM8909) += msm8909-qrd-a16c3h.dtb
+else ifeq ($(CONFIG_MACH_HY_B26D2H),y)
+dtb-$(CONFIG_ARCH_MSM8909) += msm8909-b26d2h.dtb \
+	msm8909-1gb-b26d2h.dtb
+endif
 else
 dtb-$(CONFIG_ARCH_MSM8909) += msm8909-sim.dtb \
 	msm8909-rumi.dtb \
